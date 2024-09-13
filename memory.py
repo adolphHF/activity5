@@ -16,7 +16,9 @@ from freegames import path
 
 tapsCounter = 0
 car = path('car.gif')
-tiles = list(range(32)) * 2
+tiles = ['😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', \
+ '😍', '😘', '😗', '😚', '🤗', '🤔', '😐', '😑', '🙄', '😏', '😮', '😯', '😴', '😛', \
+ '😜', '😝', '🤤', '😒', '😓', '😔'] * 2
 state = {'mark': None}
 hide = [True] * 64
 
@@ -76,7 +78,7 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 11, y + 6)
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
