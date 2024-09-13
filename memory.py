@@ -14,6 +14,7 @@ from turtle import *
 
 from freegames import path
 
+tapsCounter = 0
 car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
@@ -45,6 +46,8 @@ def xy(count):
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    global tapsCounter
+    tapsCounter += 1 # Increment taps counter
     spot = index(x, y)
     mark = state['mark']
 
@@ -77,12 +80,25 @@ def draw():
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
+    # Display the total taps in the top-left corner
+    up()
+    goto(-280, 120)  # Adjust coordinates to your preferred location
+    color('black')
+    write(f'Total taps:\n{tapsCounter}', font=('Arial', 16, 'normal'))
+
+    #Detect when all tiles revealed
+    if all(not hidden for hidden in hide):
+        up()
+        goto(0, 0)  # Center of the screen for the message
+        color('green')
+        write('All tiles discovered!', align='center', font=('Arial', 30, 'bold'))
+
     update()
     ontimer(draw, 100)
 
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(580, 420, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
